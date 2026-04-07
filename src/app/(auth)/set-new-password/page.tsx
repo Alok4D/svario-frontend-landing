@@ -3,7 +3,7 @@ import { Lock, Eye, X } from 'lucide-react';
 
 const CreateNewPassword = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-blue-50 via-blue-400 to-blue-500 p-4">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] from-blue-50 via-blue-400 to-blue-500 p-4">
       
       {/* Logo & Brand */}
       <div className="flex flex-col items-center mb-6">

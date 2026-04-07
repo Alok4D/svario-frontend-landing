@@ -18,6 +18,7 @@ const ForgotPassword = () => {
       
       {/* Logo & Brand */}
       <div className="flex flex-col items-center">
+        <Link href="/">
         <div className="flex items-center gap-2 mb-8">
           {/* Logo Icon */}
           <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center shadow-lg">
@@ -27,6 +28,7 @@ const ForgotPassword = () => {
           </div>
           <span className="text-2xl font-bold text-gray-900">Svario.is</span>
         </div>
+        </Link>
          <div className="text-center mb-8">
           <h1 className="text-5xl font-medium text-gray-800">
             Forgot <span className="text-blue-400">Password</span>

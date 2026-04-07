@@ -23,6 +23,7 @@ const LoginPage = () => {
       
       {/* Logo & Header */}
       <div className="flex flex-col items-center mb-8">
+         <Link href="/">
         <div className="flex items-center gap-2 mb-6">
           <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center shadow-lg">
              {/* Simple Message Icon Shape */}
@@ -32,6 +33,7 @@ const LoginPage = () => {
           </div>
           <span className="text-2xl font-bold text-gray-900">Svario.is</span>
         </div>
+        </Link>
         
         <h1 className="text-5xl font-medium text-gray-900 mb-2">Welcome back</h1>
         <p className="text-gray-800 font-manrope font-medium">Sign in to your account to continue</p>
