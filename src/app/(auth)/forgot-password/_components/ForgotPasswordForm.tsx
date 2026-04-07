@@ -18,8 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { AuthLogo } from "@/components/icons/AuthLogo";
-import { useForgotPasswordMutation } from "@/lib/feature/auth/authApi";
 
 const forgotPasswordSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -30,7 +28,7 @@ type ForgotPasswordValues = z.infer<typeof forgotPasswordSchema>;
 export function ForgotPasswordForm() {
   const router = useRouter();
   const [isSent, setIsSent] = useState(false);
-  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
+
 
   const form = useForm<ForgotPasswordValues>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -61,7 +59,7 @@ export function ForgotPasswordForm() {
           <div className="flex justify-center items-center w-24 h-24 mb-2">
             <AuthLogo className="w-20 h-20" />
           </div>
-          <div className="text-center text-white text-[32px] font-bold font-sans tracking-tight leading-tight">Forgot password</div>
+          <h2 className="text-center text-white text-[32px] font-bold tracking-tight leading-tight">Forgot password</h2>
           <div className="text-center text-white/60 text-base font-normal font-sans leading-relaxed">
             Password reset link has been sent to your email
           </div>
@@ -69,7 +67,7 @@ export function ForgotPasswordForm() {
         
         <Button 
           onClick={() => router.push("/login")}
-          className="self-stretch h-14 bg-[#A80B74] hover:bg-[#A80B74]/90 text-white text-base font-medium font-['DM_Sans'] leading-6 rounded-[32px] shadow-[0px_8px_30px_0px_rgba(168,11,116,0.20)] transition-all hover:scale-[1.02] active:scale-[0.98]"
+          className="self-stretch h-14 bg-[#A80B74] hover:bg-[#A80B74]/90 text-white text-base font-medium font-sans leading-6 rounded-[32px] shadow-[0px_8px_30px_0px_rgba(168,11,116,0.20)] transition-all hover:scale-[1.02] active:scale-[0.98]"
         >
           Go back to login page
         </Button>
@@ -84,7 +82,7 @@ export function ForgotPasswordForm() {
         <div className="flex justify-center items-center w-24 h-24 mb-2">
           <AuthLogo className="w-20 h-20" />
         </div>
-        <div className="text-center text-white text-[32px] font-bold font-sans tracking-tight leading-tight">Forgot password</div>
+        <h2 className="text-center text-white text-[32px] font-bold tracking-tight leading-tight">Forgot password</h2>
         <div className="text-center text-white/60 text-base font-normal font-sans leading-relaxed">
           Enter your email to receive a reset link
         </div>
@@ -120,7 +118,7 @@ export function ForgotPasswordForm() {
           <Button
             type="submit"
             disabled={isLoading || !emailValue}
-            className="self-stretch h-14 bg-[#A80B74] hover:bg-[#A80B74]/90 text-white text-base font-medium font-['DM_Sans'] leading-6 rounded-[32px] shadow-[0px_8px_30px_0px_rgba(168,11,116,0.20)] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:scale-100"
+            className="self-stretch h-14 bg-[#A80B74] hover:bg-[#A80B74]/90 text-white text-base font-medium font-sans leading-6 rounded-[32px] shadow-[0px_8px_30px_0px_rgba(168,11,116,0.20)] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:scale-100"
           >
             {isLoading ? "Sending..." : "Sent link"}
           </Button>

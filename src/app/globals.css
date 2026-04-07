@@ -5,15 +5,6 @@
 /* === THEME SETUP === */
 @custom-variant dark (&:is(.dark *));
 
-/* html,
-body,
-#__next {
-  height: 100%;
-}
-body {
-  overflow: hidden;
-} */
-
 html,
 body {
   height: 100%;
@@ -26,7 +17,9 @@ body {
 /* === THEME CONFIGURATION === */
 @theme inline {
   /* === TYPOGRAPHY === */
-  --font-sans: var(--font-inter);
+    --font-heading: var(--font-big-shoulders);
+  --font-sans: var(--font-big-shoulders);
+  --font-manrope: var(--font-manrope);
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
     Courier New, monospace;
@@ -203,6 +196,7 @@ body {
   h4,
   h5,
   h6 {
+    font-family: var(--font-heading);
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.2;
@@ -560,3 +554,7 @@ body {
 .hero-fade-d4 { animation-delay: 0.32s; }
 .hero-fade-d5 { animation-delay: 0.4s; }
 .hero-fade-d6 { animation-delay: 0.55s; }
+
+button, a{
+  cursor: pointer;
+}

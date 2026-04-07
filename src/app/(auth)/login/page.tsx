@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Mail, Lock, ArrowRight, Check, ShieldCheck } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, Lock, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -11,12 +11,10 @@ const LoginPage = () => {
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate successful login
     setShowSuccessModal(true);
     
-    // Auto redirect after 3 seconds
     setTimeout(() => {
-      router.push('/dashboard');
+      router.push('/');
     }, 3000);
   };
 
@@ -35,12 +33,12 @@ const LoginPage = () => {
           <span className="text-2xl font-bold text-gray-900">Svario.is</span>
         </div>
         
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
-        <p className="text-gray-600">Sign in to your account to continue</p>
+        <h1 className="text-5xl font-medium text-gray-900 mb-2">Welcome back</h1>
+        <p className="text-gray-800 font-manrope font-medium">Sign in to your account to continue</p>
       </div>
 
       {/* Login Card */}
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 font-manrope">
         <form onSubmit={handleSignIn} className="space-y-6">
           {/* Email Field */}
           <div>
@@ -92,7 +90,7 @@ const LoginPage = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-blue-200 transition-all active:scale-[0.98]"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-md flex items-center justify-center gap-2 shadow-lg shadow-blue-200 transition-all active:scale-[0.98]"
           >
             Sign In
             <ArrowRight className="h-4 w-4" />
@@ -111,7 +109,7 @@ const LoginPage = () => {
       </div>
 
       {/* Back to Home */}
-      <Link href="/" title="Back to home" className="mt-8 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors text-sm">
+      <Link href="/" title="Back to home" className="mt-8 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors text-sm font-manrope">
         <ArrowRight className="h-4 w-4 rotate-180" />
         Back to home
       </Link>
@@ -119,7 +117,7 @@ const LoginPage = () => {
       {/* Success Modal Overlay */}
       {showSuccessModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-white rounded-3xl shadow-2xl p-10 w-full max-w-[400px] flex flex-col items-center text-center animate-in zoom-in-95 duration-300">
+          <div className="bg-white rounded-xl shadow-xl p-10 w-full max-w-[400px] flex flex-col items-center text-center animate-in zoom-in-95 duration-300">
             
             {/* Success Icon with decorative elements */}
             <div className="relative mb-6">
@@ -133,8 +131,8 @@ const LoginPage = () => {
               <div className="absolute -top-4 left-4 w-2 h-2 bg-blue-100 rounded-full animate-pulse" />
             </div>
 
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Congratulations!</h2>
-            <p className="text-gray-500 mb-8 font-medium">You have successfully Sign In .</p>
+            <h2 className="text-3xl font-medium text-gray-900 mb-2 font-big-shoulders">Congratulations!</h2>
+            <p className="text-gray-500 mb-8 font-medium font-manrope">You have successfully Sign In.</p>
 
             {/* Loading Spinner */}
             <div className="w-10 h-10 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
