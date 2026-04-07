@@ -1,0 +1,74 @@
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+
+const authRoutes = [
+  "/login",
+  "/signup",
+  "/register",
+  "/forgot-password",
+  "/reset-password",
+  "/verify-email",
+  "/reset-success",
+  "/verify-otp",
+];
+
+const protectedRoutes = ["/dashboard"];
+const validRoles = ["STAFF", "CUSTOMER"] as const;
+
+// function decodeToken(token: string | undefined) {
+//   if (!token) return null;
+//   try {
+//     const base64Payload = token.split(".")[1];
+//     const payload = Buffer.from(base64Payload, "base64").toString();
+//     return JSON.parse(payload);
+//   } catch {
+//     return null;
+//   }
+// }
+function decodeToken(token: string | undefined) {
+  if (!token) return null;
+
+  try {
+    const payload = token.split(".")[1];
+    const decoded = JSON.parse(
+      atob(payload.replace(/-/g, "+").replace(/_/g, "/"))
+    );
+    return decoded as { role?: string };
+  } catch {
+    return null;
+  }
+}
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const token = request.cookies.get("accessToken")?.value;
+  const isAuthenticated = Boolean(token);
+
+  const decodedUser = decodeToken(token);
+  const role = decodedUser?.role;
+
+  const hasValidRole = validRoles.includes(role as (typeof validRoles)[number]);
+
+  // Redirect authenticated users away from auth pages
+  if (
+    authRoutes.some((route) => pathname.startsWith(route)) &&
+    isAuthenticated &&
+    hasValidRole
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // Protect dashboard and ensure correct role
+  if (
+    protectedRoutes.some((route) => pathname.startsWith(route)) &&
+    (!isAuthenticated || !hasValidRole)
+  ) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+};

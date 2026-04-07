@@ -1,0 +1,562 @@
+/* === IMPORTS === */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* === THEME SETUP === */
+@custom-variant dark (&:is(.dark *));
+
+/* html,
+body,
+#__next {
+  height: 100%;
+}
+body {
+  overflow: hidden;
+} */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  overflow-y: auto;
+}
+
+/* === THEME CONFIGURATION === */
+@theme inline {
+  /* === TYPOGRAPHY === */
+  --font-sans: var(--font-inter);
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
+    Courier New, monospace;
+
+  /* === TYPOGRAPHY SCALE === */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 3rem; /* 48px */
+  --text-6xl: 3.75rem; /* 60px */
+
+  /* === CORE THEME COLORS === */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* === SEMANTIC COLORS === */
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-soft: var(--destructive-soft);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  /* === INTERFACE ELEMENTS === */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* === EXTRA BRAND TOKENS === */
+  --color-black: var(--black);
+  --color-white: var(--white);
+  --color-white-60: var(--white-60);
+  --color-gray: var(--gray);
+  --color-glass: var(--glass);
+  --color-overlay-blue: var(--overlay-blue);
+
+  /* === CHART COLORS === */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* === SIDEBAR COLORS === */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* === BORDER RADIUS SCALE === */
+  --radius-sm: 8px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 14px;
+}
+
+/* === LIGHT MODE COLOR PALETTE === */
+:root {
+  --radius: 14px;
+
+  /* === BASE BRAND COLORS === */
+  --primary: #006adc;
+  --primary-dark: #0046b0;
+  --primary-foreground: #ffffff;
+
+  --secondary: #0046b0;
+  --secondary-foreground: #ffffff;
+
+  --accent: #0056b3;
+  --accent-foreground: #ffffff;
+
+  /* === BASE COLORS === */
+  --background: #ffffff;
+  --foreground: #000000;
+
+  --card: #ffffff;
+  --card-foreground: #000000;
+
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+
+  /* === TEXT / MUTED === */
+  --muted: #f5f7fa;
+  --muted-foreground: #878787;
+
+  /* === STATUS === */
+  --destructive: #ff4d4f;
+  --destructive-soft: #ff4d4f33;
+
+  --success: #00c950;
+  --success-foreground: #ffffff;
+
+  /* === UI ELEMENTS === */
+  --border: #e6eaf0;
+  --input: #dbe7f7;
+  --ring: #3aabff;
+
+  /* === RAW TOKENS === */
+  --black: #000000;
+  --white: #ffffff;
+  --white-60: #ffffff99;
+  --gray: #878787;
+  --glass: #ffffff99;
+  --overlay-blue: #0566ffcc;
+
+  /* === CHART COLORS === */
+  --chart-1: #3aabff;
+  --chart-2: #0566ffcc;
+  --chart-3: #00c950;
+  --chart-4: #878787;
+  --chart-5: #000000;
+
+  /* === SIDEBAR === */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #3aabff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffffff99;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #3aabff33;
+  --sidebar-ring: #3aabff;
+}
+
+/* === BASE LAYER STYLES === */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  .customContainer {
+    max-width: 1440px;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    transition-property: color, background-color, border-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--foreground);
+    @apply tracking-tight;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+  }
+  h2 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+  }
+  h3 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+  }
+  h4 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+  h5 {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+  }
+  h6 {
+    font-size: 1.125rem;
+  }
+
+  .heading-confident {
+    @apply tracking-tighter leading-[1.1] font-medium;
+    background: linear-gradient(to bottom right, var(--foreground), #444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* === UTILITIES === */
+@layer utilities {
+  /* === TEXT COLORS === */
+  .text-primary {
+    color: var(--primary);
+  }
+
+  .text-primary-dark {
+    color: var(--primary-dark);
+  }
+
+  .text-secondary {
+    color: var(--secondary);
+  }
+
+  .text-muted {
+    color: var(--muted-foreground);
+  }
+
+  .text-accent {
+    color: var(--accent);
+  }
+
+  .text-danger {
+    color: var(--destructive);
+  }
+
+  .text-success {
+    color: var(--success);
+  }
+
+  .text-gray-brand {
+    color: var(--gray);
+  }
+
+  .text-white-60 {
+    color: var(--white-60);
+  }
+
+  .text-black-brand {
+    color: var(--black);
+  }
+
+  .text-white-brand {
+    color: var(--white);
+  }
+
+  /* === BACKGROUND COLORS === */
+  .bg-primary {
+    background-color: var(--primary);
+  }
+
+  .bg-primary-dark {
+    background-color: var(--primary-dark);
+  }
+
+  .bg-secondary {
+    background-color: var(--secondary);
+  }
+
+  .bg-muted {
+    background-color: var(--muted);
+  }
+
+  .bg-accent {
+    background-color: var(--accent);
+  }
+
+  .bg-danger {
+    background-color: var(--destructive);
+  }
+
+  .bg-success {
+    background-color: var(--success);
+  }
+
+  .bg-glass {
+    background-color: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .bg-overlay-blue {
+    background-color: var(--overlay-blue);
+  }
+
+  .bg-black-brand {
+    background-color: var(--black);
+  }
+
+  .bg-white-brand {
+    background-color: var(--white);
+  }
+
+  /* === BORDER COLORS === */
+  .border-primary {
+    border-color: var(--primary);
+  }
+
+  .border-primary-dark {
+    border-color: var(--primary-dark);
+  }
+
+  .border-secondary {
+    border-color: var(--secondary);
+  }
+
+  .border-muted {
+    border-color: var(--muted);
+  }
+
+  .border-accent {
+    border-color: var(--accent);
+  }
+
+  .border-danger {
+    border-color: var(--destructive);
+  }
+
+  .border-success {
+    border-color: var(--success);
+  }
+
+  .border-soft {
+    border-color: var(--border);
+  }
+
+  .border-white-60 {
+    border-color: var(--white-60);
+  }
+
+  /* === RING / SHADOW HELPERS === */
+  .ring-primary {
+    --tw-ring-color: var(--primary);
+  }
+
+  .shadow-primary {
+    box-shadow: 0 10px 30px #3aabff26;
+  }
+
+  .shadow-soft {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .shadow-card-blue {
+    box-shadow: 0 20px 60px rgba(58, 171, 255, 0.18);
+  }
+
+  /* === GRADIENTS === */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #3aabff 0%, #0566ffcc 100%);
+  }
+
+  .bg-gradient-soft {
+    background: linear-gradient(180deg, #ffffff 0%, #f4f9ff 100%);
+  }
+
+  .bg-gradient-soft-diagonal {
+    background: linear-gradient(135deg, #ffffff 0%, #f4f9ff 100%);
+  }
+
+  .bg-gradient-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f6fbff 100%);
+  }
+
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, #00122f 0%, #0566ffcc 100%);
+  }
+
+  .bg-gradient-blue-violet {
+    background: linear-gradient(135deg, #3aabff 0%, #0566ffcc 100%);
+  }
+
+  .bg-gradient-overlay {
+    background: linear-gradient(180deg, #3aabff1a 0%, #ffffff 100%);
+  }
+
+  .bg-gradient-primary-10 {
+    background: linear-gradient(135deg, #3aabff 10%, #ffffff 100%);
+  }
+
+  .bg-gradient-primary-20 {
+    background: linear-gradient(135deg, #3aabff 20%, #ffffff 100%);
+  }
+
+  .bg-gradient-primary-30 {
+    background: linear-gradient(135deg, #3aabff 30%, #ffffff 100%);
+  }
+
+  /* === BUTTON HELPERS === */
+  .btn-primary {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-dark);
+  }
+
+  .btn-secondary {
+    background-color: var(--white);
+    color: var(--black);
+    border: 1px solid var(--border);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  /* === BORDER RADIUS === */
+  .rounded-main {
+    border-radius: var(--radius);
+  }
+
+  /* === SPECIAL CUSTOM === */
+  .customOrange {
+    color: #20f818;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e6eaf0;
+    border-radius: 10px;
+  }
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #ffffff1a;
+  }
+}
+
+/* === SCROLL-REVEAL ANIMATIONS (GPU-composited, zero JS) === */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-35px); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-45px); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
+
+@keyframes float4 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-50px); }
+}
+
+/* Fade-up on scroll (triggered by IntersectionObserver class toggle) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays */
+.reveal-d1 { transition-delay: 0.06s; }
+.reveal-d2 { transition-delay: 0.12s; }
+.reveal-d3 { transition-delay: 0.18s; }
+.reveal-d4 { transition-delay: 0.24s; }
+.reveal-d5 { transition-delay: 0.3s; }
+.reveal-d6 { transition-delay: 0.36s; }
+
+/* Floating animations for hero bubbles */
+.float-1 {
+  animation: float1 7s ease-in-out infinite;
+  will-change: transform;
+}
+.float-2 {
+  animation: float2 8.5s ease-in-out infinite;
+  animation-delay: -2s;
+  will-change: transform;
+}
+.float-3 {
+  animation: float3 9s ease-in-out infinite;
+  animation-delay: -4s;
+  will-change: transform;
+}
+.float-4 {
+  animation: float4 10s ease-in-out infinite;
+  animation-delay: -1s;
+  will-change: transform;
+}
+
+/* Hero entrance */
+.hero-fade {
+  animation: fadeUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+.hero-fade-d1 { animation-delay: 0.08s; }
+.hero-fade-d2 { animation-delay: 0.16s; }
+.hero-fade-d3 { animation-delay: 0.24s; }
+.hero-fade-d4 { animation-delay: 0.32s; }
+.hero-fade-d5 { animation-delay: 0.4s; }
+.hero-fade-d6 { animation-delay: 0.55s; }
