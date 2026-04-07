@@ -8,27 +8,7 @@ import {
   Eye, 
   ArrowRight, 
   Github, 
-  Check, 
-  ShieldCheck,
-  Layout,
-  Laptop,
-  Users,
-  Settings,
-  Bot,
-  Inbox,
-  Zap,
-  Globe,
-  Plus,
-  Trash2,
-  Upload,
-  Link as LinkIcon,
-  MessageSquare,
-  MessageCircle,
-  Instagram,
-  Facebook,
-  Send,
-  Smartphone,
-  ChevronLeft
+  Check
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
