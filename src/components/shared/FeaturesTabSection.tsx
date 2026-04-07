@@ -127,7 +127,7 @@ const FeaturesTabSection = () => {
                 <h3 className="text-2xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight">
                   {activeTab.title}
                 </h3>
-                <p className="text-sm md:text-xl text-slate-500 leading-relaxed font-normal">
+                <p className="text-sm md:text-xl text-slate-500 leading-relaxed font-manrope">
                   {activeTab.description}
                 </p>
                 <div className="pt-2 md:pt-4">
