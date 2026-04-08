@@ -12,6 +12,10 @@ import {
   Database,
   Terminal,
   Code,
+  Circle,
+  Sparkles,
+  Stars,
+  Plus,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -19,9 +23,11 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const icons = [Ghost, Bot, Cpu, Zap, CircuitBoard, Database, Terminal, Code];
+const bubbleIcons = [Circle, Sparkles, Stars, Plus];
 
 export default function NotFoundPage() {
   const [floatingIcons, setFloatingIcons] = useState<any[]>([]);
+  const [sideBubbles, setSideBubbles] = useState<any[]>([]);
 
   useEffect(() => {
     // Generate random icons with random positions and durations
@@ -35,20 +41,68 @@ export default function NotFoundPage() {
       opacity: 0.05 + Math.random() * 0.1,
     }));
     setFloatingIcons(newIcons);
+
+    // Generate random side bubbles
+    const newSideBubbles = Array.from({ length: 12 }).map((_, i) => ({
+      id: i,
+      Icon: bubbleIcons[Math.floor(Math.random() * bubbleIcons.length)],
+      side: i % 2 === 0 ? "left" : "right",
+      duration: 8 + Math.random() * 12,
+      delay: Math.random() * 10,
+      size: 16 + Math.random() * 24,
+      opacity: 0.1 + Math.random() * 0.2,
+      xOffset: (Math.random() - 0.5) * 100,
+    }));
+    setSideBubbles(newSideBubbles);
   }, []);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-slate-50 dark:bg-black px-4">
       {/* Grid Background */}
-      <div className="absolute inset-0 z-0 opacity-[0.3] dark:opacity-[0.08]" 
+      <div
+        className="absolute inset-0 z-0 opacity-[0.3] dark:opacity-[0.08]"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(59, 130, 246, 0.15) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(59, 130, 246, 0.15) 1px, transparent 1px)
           `,
-          backgroundSize: '40px 40px'
+          backgroundSize: "40px 40px",
         }}
       />
+
+      {/* Floating Side Bubbles (Icons) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {sideBubbles.map((item) => (
+          <motion.div
+            key={`bubble-${item.id}`}
+            initial={{ y: "110%", opacity: 0 }}
+            animate={{
+              y: "-10%",
+              x: [item.xOffset, item.xOffset + (item.side === "left" ? 50 : -50)],
+              opacity: [0, item.opacity, item.opacity, 0],
+              rotate: 360,
+            }}
+            transition={{
+              duration: item.duration,
+              repeat: Infinity,
+              delay: item.delay,
+              ease: "linear",
+            }}
+            className="absolute"
+            style={{
+              [item.side === "left" ? "left" : "right"]: `${Math.random() * 15}%`,
+            }}
+          >
+            <item.Icon
+              size={item.size}
+              className={`${
+                item.side === "left" ? "text-blue-500" : "text-indigo-500"
+              } blur-[1px]`}
+              style={{ opacity: item.opacity }}
+            />
+          </motion.div>
+        ))}
+      </div>
 
       {/* Floating Background Icons */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -204,7 +258,7 @@ export default function NotFoundPage() {
             >
               <Link href="/">
                 <ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
-                Return to Core
+                Back to Home
               </Link>
             </Button>
           </motion.div>
